@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9C36B590-20F9-43F2-8C28-D3F0617A17A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F406A186-87C5-4898-AE70-683197032C6E}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NETCore.Extensions.Excel", "src\NETCore.Extensions.Excel\NETCore.Extensions.Excel.xproj", "{54FDD279-161C-456C-9423-79BBD344E931}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54FDD279-161C-456C-9423-79BBD344E931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54FDD279-161C-456C-9423-79BBD344E931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54FDD279-161C-456C-9423-79BBD344E931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54FDD279-161C-456C-9423-79BBD344E931}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{54FDD279-161C-456C-9423-79BBD344E931} = {9C36B590-20F9-43F2-8C28-D3F0617A17A5}
+	EndGlobalSection
+EndGlobal

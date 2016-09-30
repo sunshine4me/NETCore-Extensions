@@ -3,3 +3,5 @@
 ################################################################################
 
 /src/NETCore.Extensions.Excel/obj
+/src/NETCore.Extensions.Excel/bin
+/.vs
