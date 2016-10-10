@@ -127,6 +127,27 @@ namespace NETCore.Extensions.Excel {
             }
         }
 
+        public void ReNameSheet(uint Id,string name) {
+            var wb = ZipArchive.GetEntry("xl/workbook.xml");
+            using (var stream = wb.Open()) {
+                var sr = new StreamReader(stream);
+                var result = sr.ReadToEnd();
+                var xd = new XmlDocument();
+                xd.LoadXml(result);
+                var tmp = xd.GetElementsByTagName("sheet")
+                    .Cast<XmlNode>()
+                    .Where(x => x.Attributes["sheetId"].Value == Id.ToString())
+                    .Single();
+                tmp.Attributes["name"].Value = name;
+                stream.Position = 0;
+                stream.SetLength(0);
+                xd.Save(stream);
+            }
+
+        }
+
+        
+
 
 
 

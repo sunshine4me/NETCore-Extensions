@@ -12,19 +12,8 @@ namespace NETCore.Extensions.Excel.Infrastructure
         private string xmlSource;
 
         private Dictionary<uint, string> dic = new Dictionary<uint, string>();
-        private Dictionary<string, uint> dic2 = new Dictionary<string, uint>();
-        private int nullIndex = 0;
 
-        public bool Exist(string str)
-        {
-            if (string.IsNullOrEmpty(str))
-            {
-                return false;
-            }
-            if (dic2.ContainsKey(str))
-                return true;
-            return false;
-        }
+
 
         public int Count
         {
@@ -65,7 +54,6 @@ namespace NETCore.Extensions.Excel.Infrastructure
             {
                 var index = i++;
                 dic.Add(index, x.InnerText);
-                dic2.Add(x.InnerText, index);
             }
             xmlSource = null;
             GC.Collect();
@@ -89,15 +77,7 @@ namespace NETCore.Extensions.Excel.Infrastructure
             GC.Collect();
         }
 
-        public uint _IndexOf(string item)
-        {
-            return dic2[item];
-        }
 
-        public int IndexOf(string item)
-        {
-            return (int)dic2[item];
-        }
 
         public void Insert(int index, string item)
         {
@@ -110,7 +90,6 @@ namespace NETCore.Extensions.Excel.Infrastructure
             {
                 var str = dic[Convert.ToUInt32(index)];
                 dic.Remove(Convert.ToUInt32(index));
-                dic2.Remove(str);
             }
         }
 
@@ -121,21 +100,18 @@ namespace NETCore.Extensions.Excel.Infrastructure
                 //修复添加null值时，报错的Bug
                 if (item == null)
                 {
-                    nullIndex++;
                     item = "Null";
                 }
 
                 if (dic.Count == 0)
                 {
                     dic.Add(0, item);
-                    dic2.Add(item, 0);
                     return 0;
                 }
                 else
                 {
                     var last = dic.Last().Key;
                     dic.Add(last + 1, item);
-                    dic2.Add($"{item}{nullIndex}", last + 1);
                     return last + 1;
                 }
             }
@@ -148,13 +124,11 @@ namespace NETCore.Extensions.Excel.Infrastructure
                 if (dic.Count == 0)
                 {
                     dic.Add(0, item);
-                    dic2.Add(item, 0);
                 }
                 else
                 {
                     var last = dic.Max(x => x.Key);
                     dic.Add(last + 1, item);
-                    dic2.Add(item, last + 1);
                 }
             }
         }
@@ -162,12 +136,6 @@ namespace NETCore.Extensions.Excel.Infrastructure
         public void Clear()
         {
             dic.Clear();
-            dic2.Clear();
-        }
-
-        public bool Contains(string item)
-        {
-            return dic2.ContainsKey(item);
         }
 
         public void CopyTo(string[] array, int arrayIndex)
@@ -200,6 +168,18 @@ namespace NETCore.Extensions.Excel.Infrastructure
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+        public int IndexOf(string item) {
+            return  -1;
+        }
+
+        public bool Contains(string item) {
+            var d = dic.FirstOrDefault(t => t.Value == item);
+            if (d.Value != item)
+                return false;
+            else
+                return true;
         }
     }
 }
